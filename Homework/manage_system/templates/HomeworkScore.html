@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="luffy-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <div style="margin: 5px 0">
+                <input type="submit" value="保存" class="btn btn-success">
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>分数</th>
+                    <th>作业文字版</th>
+                    <th>文件存储地址</th>
+                </tr>
+                {% for form in formset %}
+                    <tr>
+                        {{ form.id }}
+                        <td>{{ form.instance.student }}</td>
+                        <td>{{ form.score }} <span style="color: red">{{ form.score.errors.0 }}</span></td>
+                        {% if not form.instance.homework %}
+                            <td>学生没有传输文字版作业</td>
+                        {% else %}
+                            <td>{{ form.instance.homework }} <span
+                                    style="color: red">{{ form.homework.errors.0 }}</span>
+                            </td>
+                        {% endif %}
+
+                        {% if not form.instance.avatar %}
+                            <td>学生没有传输文件版作业</td>
+                        {% else %}
+                            <td>{{ form.instance.avatar }} <span style="color: red">{{ form.avatar.errors.0 }}</span>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                </thead>
+            </table>
+        </form>
+
+    </div>
+{% endblock %}

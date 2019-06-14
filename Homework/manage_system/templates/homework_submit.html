@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            float: left;
+            padding: 10px;
+            padding-left: 0;
+            width: 80px;
+        }
+
+        ul li i {
+            font-size: 18px;
+            margin-left: 5px;
+            color: #1b6d85;
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="luffy-container">
+        <form class="form-horizontal clearfix" method="post" id="form" novalidate>
+            {% csrf_token %}
+            <div class="form-group clearfix">
+                <label for="{{ form.homework.auto_id }}"
+                       class=" col-sm-2 control-label">{{ form.homework.label }}</label>
+                <div class="col-sm-8">
+                    {{ form.homework }}
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="file" id="avatar"> <span class="error pull-right"></span>
+            </div>
+            <div class="form-group col-sm-12">
+                <div class="col-sm-6">
+                    <div class="col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary reg-btn">提 交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('.reg-btn').click(function () {
+            var formdata = new FormData();
+            var request_data = $('#form').serializeArray();
+            console.log(request_data);
+            $.each(request_data, function (index, data) {
+                formdata.append(data.name, data.value)
+            });
+            {#formdata.append('user',$('#id_user').val());#}
+            {#formdata.append('pwd',$('#id_pwd').val());#}
+            {#formdata.append('re_pwd',$('#id_re_pwd').val());#}
+            {#formdata.append('email',$('#id_email').val());#}
+            formdata.append('avatar', $('#avatar')[0].files[0]);
+            formdata.append('csrfmiddlewaretoken', $('[name = csrfmiddlewaretoken]').val());
+
+
+            $.ajax({
+                url: '',
+                type: 'POST',
+                contentType: false,
+                processData: false,
+                data: formdata,
+                success: function (data) {
+                    console.log(data);
+                    if (data.msg) {
+                        function show(){
+                            $('span.error').text(data.msg).attr('style','red');
+                        }
+                        setTimeout(show(),3000);
+                    }
+
+                }
+            })
+        })
+    </script>
+{% endblock %}

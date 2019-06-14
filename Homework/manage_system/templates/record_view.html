@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="luffy-container">
+        {% for record in record_list %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                   {{ record.note }}
+                    <div style="float: right">
+                        <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+                       {{ record.consultant.name }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="luffy-container">
+        {% for homework in homework_list %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>作业标题</span>
+                </div>
+                <div class="panel-body">
+                    {{ homework.homework_title }}
+                    <div style="float: right">
+                        <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+                        {{ homework.class_object.class_teacher.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>作业描述</span>
+                </div>
+                <div class="panel-body">
+                    {{ homework.homework_memo }}
+                    <div style="float: right">
+                        <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+                        {{ homework.class_object.class_teacher.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading center">
+                    <span>踩分点</span>
+                </div>
+                <div class="panel-body">
+                    {{ homework.exam }}
+                    <div style="float: right">
+                        <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+                        {{ homework.class_object.class_teacher.name }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
