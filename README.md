@@ -7,4 +7,6 @@ This System is developed by Django in python.
    and separate sales, student, and lecturer roles according to business needs.
 
 2. Developing a universal, pluggable addition, deletion, modification and search component, 
-   which can be easily embedded in various Django projects
+   which can be easily embedded in various Django projects.
+   
+Note: Some String in this System is Chinese because this project I have already written for competition hold by Chinese company.
